@@ -1,0 +1,14 @@
+name: Fetch and read number
+on: [push]
+jobs:
+  scrape_website:
+    runs-on: ubuntu-latest
+    steps:
+     - name: Checkout
+       uses: actions/checkout@v2
+     - name: install opencv and pytesseract
+       run: pip install opencv-python pytesseract
+     - name: run scripts
+       run: python reader.py 
+
+    
