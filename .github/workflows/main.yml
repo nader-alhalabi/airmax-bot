@@ -11,7 +11,7 @@ jobs:
        with:
          python-version: '3.9'
      - name: install dependencies
-       run: pip install requests opencv-python pytesseract
+       run: pip install requests opencv-python pytesseract beautifulsoup4
      - name: run scripts
        run: python reader.py 
 
