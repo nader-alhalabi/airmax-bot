@@ -9,8 +9,8 @@ urllib.request.urlretrieve(pro, "pro.jpg")
 
 print(airmax, pro)
 
-img = cv2.imread(airmax)
-img2 = cv2.imread(pro)
+img = cv2.imread("airmax.jpg")
+img2 = cv2.imread("pro.jpg")
 text = pytesseract.image_to_string(img)
 text2 = pytesseract.image_to_string(img2)
 print("Airmax:", text)
