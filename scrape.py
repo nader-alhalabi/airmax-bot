@@ -11,5 +11,6 @@ def scrape_images():
     if result.status_code == 200:
         soup = BeautifulSoup(result.content, "html.parser")
 
-    images = soup.find_all('img', {'src':re.compile('.jpg')})
-    return images[5]["src"], images[9]["src"]
+    airmax = soup.find_all('img', {'src':re.compile(r'[0-9].jpg')})
+    pro = soup.find_all('img', {'src':re.compile(r'[A-Z].jpg')})
+    return airmax[0]["src"], pro[0]["src"]
