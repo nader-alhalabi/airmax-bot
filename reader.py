@@ -3,15 +3,15 @@ import pytesseract
 import scrape
 import urllib.request
 
-airmax, pro = scrape.scrape_images()
+airmax = scrape.scrape_images()
 urllib.request.urlretrieve(airmax, "airmax.jpg")
-urllib.request.urlretrieve(pro, "pro.jpg")
+#urllib.request.urlretrieve(pro, "pro.jpg")
 
-print(airmax, pro)
+print(airmax)
 
 img = cv2.imread("airmax.jpg")
-img2 = cv2.imread("pro.jpg")
+#img2 = cv2.imread("pro.jpg")
 text = pytesseract.image_to_string(img)
-text2 = pytesseract.image_to_string(img2)
+#text2 = pytesseract.image_to_string(img2)
 print("Airmax:", text)
-print("Airmax Pro:", text2)
+#print("Airmax Pro:", text2)
