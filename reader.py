@@ -13,5 +13,8 @@ img = cv2.imread("airmax.jpg")
 #img2 = cv2.imread("pro.jpg")
 text = pytesseract.image_to_string(img)
 #text2 = pytesseract.image_to_string(img2)
-print("Airmax:", text)
+
+# extract only the code from the image text
+final_code = [int(s) for s in text.split() if s.isdigit()][1]
+print("Airmax:", final_code)
 #print("Airmax Pro:", text2)
