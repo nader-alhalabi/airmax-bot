@@ -10,13 +10,13 @@ jobs:
        uses: actions/setup-python@v1
        with:
          python-version: '3.9'
-     - name: install tesseract-ocr
-       run: |
-        sudo apt install tesseract-ocr
-        sudo apt install libtesseract-dev
+#     - name: install tesseract-ocr
+#       run: |
+#        sudo apt install tesseract-ocr
+#        sudo apt install libtesseract-dev
      - name: install dependencies
-       run: pip install requests opencv-python pytesseract beautifulsoup4
+       run: pip install requests beautifulsoup4 #opencv-python pytesseract 
      - name: run scripts
-       run: python reader.py 
+       run: python scrape.py 
 
     

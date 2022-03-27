@@ -1,3 +1,4 @@
+from wsgiref.util import request_uri
 import requests
 import re
 from bs4 import BeautifulSoup
@@ -22,4 +23,9 @@ def scrape_images():
 
     airmax = soup.find_all('img', {'src':re.compile(r'[0-9].jpg')})
     #pro = soup.find_all('img', {'src':re.compile(r'[A-Z].jpg')})
-    return airmax[0]["src"]#, pro[0]["src"]
+    #return airmax[0]["src"], pro[0]["src"]
+    final_code = re.findall(r'\b\d+\b', airmax[0]["src"])[2]
+    return final_code
+
+
+print(scrape_images())
