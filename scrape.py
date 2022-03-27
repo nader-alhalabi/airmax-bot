@@ -21,5 +21,5 @@ def scrape_images():
         soup = BeautifulSoup(result.content, "html.parser")
 
     airmax = soup.find_all('img', {'src':re.compile(r'[0-9].jpg')})
-    pro = soup.find_all('img', {'src':re.compile(r'[A-Z].jpg')})
-    return airmax[0]["src"], pro[0]["src"]
+    #pro = soup.find_all('img', {'src':re.compile(r'[A-Z].jpg')})
+    return airmax[0]["src"]#, pro[0]["src"]
