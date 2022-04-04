@@ -22,7 +22,7 @@ def scrape_images():
         soup = BeautifulSoup(result.content, "html.parser")
 
     airmax = soup.find_all('img', {'src':re.compile(r'[0-9].jpg')})
-    pro = soup.find_all('img', {'src':re.compile(r'[A-Z][0-9].jpg')})
+    pro = soup.find_all('img', {'src':re.compile(r'[A-Z0-9].jpg')})
     #return airmax[0]["src"], pro[0]["src"]
     final_code = re.findall(r'\b\d+\b', airmax[0]["src"])[2]
     final_code2 = re.findall(r'[0-9A-Z]{6,6}', pro[0]["src"])[0]
