@@ -1,5 +1,5 @@
 name: Fetch and read number
-on: [push]
+on: [push, workflow_dispatch]
 jobs:
   scrape_website:
     runs-on: ubuntu-latest
