@@ -17,7 +17,7 @@ jobs:
      - name: install dependencies
        run: pip install requests beautifulsoup4 #opencv-python pytesseract 
      - name: run scripts
-       run: python scrape.py
+       run: python scrape.py >> $GITHUB_OUTPUT
      - name: push to ntfy
        run: curl -d "$(python scrape.py)" ntfy.sh/${{ secrets.TOPIC_NAME }}
     
