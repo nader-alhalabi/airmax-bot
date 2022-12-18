@@ -3,30 +3,34 @@ import requests
 import re
 from bs4 import BeautifulSoup
 
-page1 = "https://www.vviruslove.com/2-%d9%83%d9%88%d8%af-%d8%aa%d9%81%d8%b9%d9%8a%d9%84-code-airmax-2023-2022/"
-page2 = "https://www.vviruslove.com/2-%d9%83%d9%88%d8%af-%d8%aa%d9%81%d8%b9%d9%8a%d9%84-code-airmax-2023-2022-2/"
+main_page = "https://www.vviruslove.com/%D8%AA%D9%81%D8%B9%D9%8A%D9%84-%D9%83%D9%88%D8%AF-airmax-tv-iptv-%D9%85%D8%AF%D8%A9-%D8%A7%D9%84%D8%AD%D9%8A%D8%A7%D8%A9-%D9%85%D8%B4%D8%A7%D9%87%D8%AF%D8%A9-%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9/"
 
-# check which link has the code image
-def check_link():
-    result = requests.get(page1)
-    if result.url != "https://www.vviruslove.com/":
-        return result
-    else:
-        return requests.get(page2)
+def get_click_page():
+    result = requests.get(main_page)
+    soup = BeautifulSoup(result.content, "html.parser")
+    air = soup.find_all("a", style="color: #0000ff;")
+    return air[1]["href"]
+
+
+def get_code_page(click_page):
+    result1 = requests.get(click_page)
+    soup = BeautifulSoup(result1.content, "html.parser")
+    air = soup.find_all("a", class_="su-button su-button-style-default su-button-wide")
+    return air[0]["href"]
+
 
 def scrape_images():
-    result = check_link()
-
-    # if successful parse the download into a BeautifulSoup object, which allows easy manipulation 
-    if result.status_code == 200:
-        soup = BeautifulSoup(result.content, "html.parser")
+    click_page = get_click_page()
+    code_page = get_code_page(click_page)
+    result = requests.get(code_page)
+    soup = BeautifulSoup(result.content, "html.parser")
 
     airmax = soup.find_all('img', {'src':re.compile(r'[0-9].jpg')})
     pro = soup.find_all('img', {'src':re.compile(r'[A-Z0-9].jpg')})
-    #return airmax[0]["src"], pro[0]["src"]
-    final_code = re.findall(r'\b\d+\b', airmax[1]["src"])[2]
-    final_code2 = re.findall(r'[0-9A-Z]{6,6}', pro[2]["src"])[0]
-    return final_code, final_code2
+
+    airmax_code = re.findall(r'\b\d+\b', airmax[1]["src"])[2]
+    pro_code = re.findall(r'[0-9A-Z]{6,6}', pro[2]["src"])[0]
+    return airmax_code, pro_code
 
 
 airmax_code, pro_code = scrape_images()
