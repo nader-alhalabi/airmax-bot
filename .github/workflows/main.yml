@@ -3,7 +3,7 @@ on:
   push:
   workflow_dispatch:
   schedule:
-  - cron: "0 14 * * 0"
+  - cron: "0 9 * * 6"
 
 jobs:
   scrape_website:
